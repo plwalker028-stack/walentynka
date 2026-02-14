@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dla Bubu 💘</title>
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .box {
+        background: white;
+        width: 92%;
+        max-width: 380px;
+        padding: 25px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        animation: fadeIn 1s ease;
+    }
+
+    img.main {
+        width: 100%;
+        border-radius: 18px;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        color: #e63946;
+        font-size: 26px;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+        line-height: 1.4;
+    }
+
+    .buttons {
+        margin-top: 25px;
+        position: relative;
+        height: 120px;
+    }
+
+    button {
+        width: 100%;
+        padding: 16px;
+        font-size: 20px;
+        border: none;
+        border-radius: 14px;
+        cursor: pointer;
+        margin-bottom: 12px;
+    }
+
+    #yes { background: #e63946; color: white; }
+    #no  { background: #adb5bd; color: white; position: absolute; bottom: 0; left: 0; }
+
+    /* Animacje */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.96); }
+        to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes photoIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.96);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .gallery img {
+        width: 100%;
+        border-radius: 18px;
+        margin-top: 15px;
+        opacity: 0;
+        animation: photoIn 0.9s ease forwards;
+    }
+
+    .gallery img:nth-child(1) { animation-delay: 0.4s; }
+    .gallery img:nth-child(2) { animation-delay: 0.8s; }
+
+    /* Serduszka */
+    .heart {
+        position: absolute;
+        animation: float 6s linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes float {
+        from { transform: translateY(100vh) scale(1); opacity: 1; }
+        to   { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="love.mp3" preload="auto"></audio>
+
+<div class="box">
+    <img src="bubu.jpg" class="main" alt="Dla Ciebie ❤️">
+
+    <h1>💖 Bubu 💖</h1>
+    <p>
+        Mam do Ciebie jedno bardzo ważne pytanie...<br><br>
+        <strong>Czy zostaniesz moją walentynką?</strong> 💘
+    </p>
+
+    <div class="buttons">
+        <button id="yes" onclick="yesClicked()">TAK ❤️</button>
+        <button id="no" onclick="moveNo()">NIE 😢</button>
+    </div>
+</div>
+
+<script>
+function yesClicked() {
+    document.getElementById("music").play();
+
+    document.body.innerHTML = `
+        <div class="box">
+            <h1>💞 Bubu powiedziała TAK! 💞</h1>
+
+            <p id="jokeText">
+                Każda chwila z Tobą jest dla mnie męczarnią…
+            </p>
+
+            <div class="gallery">
+                <img src="foto1.jpg" alt="Nasze wspomnienie 1">
+                <img src="foto2.jpg" alt="Nasze wspomnienie 2">
+            </div>
+        </div>
+    `;
+
+    setTimeout(() => {
+        document.getElementById("jokeText").innerHTML += `
+            <br><strong>(żartowałem 😉)</strong><br><br>
+            Z miłością,<br>
+            <strong>chomiczek Matijas 🐹❤️</strong>
+        `;
+    }, 1500);
+}
+
+function moveNo() {
+    const noBtn = document.getElementById("no");
+    noBtn.style.left = Math.random() * 150 + "px";
+    noBtn.style.bottom = Math.random() * 60 + "px";
+}
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 22) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 350);
+</script>
+
+</body>
+</html>
